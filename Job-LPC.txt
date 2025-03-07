@@ -1,0 +1,74 @@
+
+
+	UNIVERSIDADE EDUARDO MONDLANE
+	FACULDADE DE CIENCIAS
+	DEPARTAMENTO DE MATEMATICA E INFORMATICA
+	LINGUAGENS DE PROGRAMACAO E COMPILADORES
+	LABORAL- 2025
+	
+	DISCENTES: 
+			  FRENK FRANCISCO
+			  JANILIA DA PERCIA
+			  ILIDIO MAGULE
+			  
+	DOCENTE: ALFREDO MUCHANGA
+
+
+
+
+public class AnalisadorLExicoLPC {
+
+    public static void main(String[] args) {
+        // Palavra-chave que queremos encontrar
+        String palavraChave = "SELECT";
+        
+        // Texto de exemplo onde vamos procurar a palavra
+        String texto = "Texto de exemplo: SeLeCt está em alguns lugares como select ou SELECT.";
+
+        // Verifica se a palavra-chave tem o tamanho correto
+        if (palavraChave.length() != 6) {
+            System.out.println("A palavra-chave precisa ter exatamente 6 caracteres.");
+            return;
+        }
+
+        
+        // Função para encontrar as posições da palavra-chave
+        encontrarSelect(texto, palavraChave);
+    }
+
+    // Função que encontra a palavra-chave (insensível a maiúsculas/minúsculas)
+    public static void encontrarSelect(String texto, String palavraChave) {
+        // Armazena se encontrou a palavra ou não
+        boolean encontrou = false;
+
+        // Verifica todas as possíveis posições onde a palavra pode começar
+        for (int i = 0; i <= texto.length() - palavraChave.length(); i++) {
+            boolean encontrado = true;
+
+            // Compara caractere por caractere de forma insensível a maiúsculas/minúsculas
+            for (int j = 0; j < palavraChave.length(); j++) {
+                if (!saoIguais(texto.charAt(i + j), palavraChave.charAt(j))) {
+                    encontrado = false;
+                    break;
+                }
+            }
+
+            // Se a palavra for encontrada, imprime a posição
+            if (encontrado) {
+                System.out.println("A palavra '" + palavraChave + "' foi encontrada na posição: " + i);
+                encontrou = true;
+            }
+        }
+
+        // Se não encontrou a palavra, avisa
+        if (!encontrou) {
+            System.out.println("A palavra '" + palavraChave + "' não foi encontrada no texto.");
+        }
+    }
+
+    // Função que compara caracteres de forma insensível a maiúsculas/minúsculas
+    public static boolean saoIguais(char c1, char c2) {
+        // Compara os caracteres ignorando o caso
+        return Character.toLowerCase(c1) == Character.toLowerCase(c2);
+    }
+}
